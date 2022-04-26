@@ -1,0 +1,25 @@
+int neighbourX;
+        int neighbourY;
+        for(int x = patchX - 1; x < patchX + 1; x++){ // left andright neighbour
+            for(int y = patchY -1; y < patchY + 1; y++){ //up and down neighbour
+                if(x == grid.length){ 
+                    neighbourX = rowMin; //if the left neighbour is -1, consider the very last patch in the row
+                } else { 
+                    neighbourX = x % rowPatch; //consider the very left patch in the patch again
+                }
+                if (x == 0){
+                    neighbourX = rowMax;
+                }
+                else {
+                    
+                }
+                if(y == -1){
+                    neighbourY = colPatch - 1; // if the upper neighbour is -1, consider the very last patch in the column 
+                } else {
+                    neighbourY = y % colPatch; // consider again the patch which is the most upper in the collumn 
+                }
+                neighbour.add(new int[] {neighbourX, neighbourY}); 
+            }
+        }
+
+        SwingUtilities.invokeLater( () -> {

@@ -1,0 +1,658 @@
+public void step() {
+        for (int x = 0; x < gridSize; x++){
+            for (int y = 0; y < gridSize; y++){
+                //Set for the case when both x and y are 0 because special rules apply
+                if (x == 0 && y == 0){
+                    int[] neighboursXCoordinate = {49, 0, 1, 49, 1, 49, 0, 1};
+                    int [] neighboursYCoordinate = {49, 49, 49, 0, 0, 1, 1, 1};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+                }
+                //set in case x and y are both 49 because special rules apply
+                else if (x == 49 && y == 49){
+                    int[] neighboursXCoordinate = {48, 49, 0, 48, 0, 48, 49, 0};
+                    int [] neighboursYCoordinate = {48, 48, 48, 49, 49, 0, 0, 0};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+                }
+                //set in case x is 0 and y is 49 because special rules apply
+                else if(x==49 && y == 0){
+                    int[] neighboursXCoordinate = {48, 49, 0, 48, 0, 48, 49, 0};
+                    int [] neighboursYCoordinate = {49, 49, 49, 0, 0, 1, 1, 1};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+                }
+                //set in case x is 49 and y is 0 because special rules apply
+                else if (x == 0 && y == 49){
+                    int[] neighboursXCoordinate = {49, 0, 1, 49, 1, 49, 0, 1};
+                    int [] neighboursYCoordinate = {48, 48, 48, 49, 49, 0, 0, 0};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+                }
+                //for special case where x = 0
+                else if (x==0){
+                    int[] offsetX = {49, 0, 1, 49, 1, 49, 0, 1};
+                    int [] offsetY = {-1, -1, -1, 0, 0, 1, 1, 1};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+
+                }
+                //for special case where y = 0
+                else if (y == 0){
+                    int[] offsetX = {-1, 0, 1, -1, 1, -1, 0, -1};
+                    int [] offsetY = {49, 49, 49, 0, 0, 1, 1, 1};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+                }
+                //for special case where x = 49
+                else if (x == 49){
+                    int[] offsetX = {-1, 0, -49, -1, -49, -1, 0, -49};
+                    int [] offsetY = {-1, -1, -1, 0, 0, 1, 1, 1};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+                }
+                //for special case where y = 49
+                else if (y == 49){
+                    int[] offsetX = {-1, 0, 1, -1, 1, -1, 0, 1};
+                    int [] offsetY = {-1, -1, -1, 0, 0, -49, -49, -49};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+                }
+                //for normal cases where neither x or y are 0 or 49
+                else{
+                    int[] offsetX = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
+                    int[] offsetY = new int[]{-1, -1, -1, 0, 0, 1, 1, 1};
+                    scoreCount = 0.0;
+                    if (grid[x][y].isCooperating()){
+                        for(int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }
+                        }
+                        grid[x][y].setScore(scoreCount);
+                    }
+                    else{
+                        for (int i = 0; i < 8; i++){
+                            if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                                scoreCount++;
+                            }  
+                        }
+                        scoreCount = scoreCount * alpha;
+                        grid[x][y].setScore(scoreCount);
+                    }
+                }
+                //continue code here after finishing setScore
+                //next up find highest score among neighbours
+                double currentHighestScore = grid[x][y].getScore();
+                boolean highestScoreIsC = grid[x][y].isCooperating();
+                //set up all cases again to check score against each neighbour
+                if (x == 0 && y == 0){
+                    int[] neighboursXCoordinate = {49, 0, 1, 49, 1, 49, 0, 1};
+                    int [] neighboursYCoordinate = {49, 49, 49, 0, 0, 1, 1, 1};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore();
+                            highestScoreIsC = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                else if (x == 49 && y == 49){
+                    int[] neighboursXCoordinate = {48, 49, 0, 48, 0, 48, 49, 0};
+                    int [] neighboursYCoordinate = {48, 48, 48, 49, 49, 0, 0, 0};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore();
+                            highestScoreIsC = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                else if (x == 49 && y == 0){
+                    int[] neighboursXCoordinate = {48, 49, 0, 48, 0, 48, 49, 0};
+                    int [] neighboursYCoordinate = {49, 49, 49, 0, 0, 1, 1, 1};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore();
+                            highestScoreIsC = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                else if (x == 0 && y == 49){
+                    int[] neighboursXCoordinate = {49, 0, 1, 49, 1, 49, 0, 1};
+                    int [] neighboursYCoordinate = {48, 48, 48, 49, 49, 0, 0, 0};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore();
+                            highestScoreIsC = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                else if (x == 0){
+                    int[] offsetX = {49, 0, 1, 49, 1, 49, 0, 1};
+                    int [] offsetY = {-1, -1, -1, 0, 0, 1, 1, 1};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                            highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                else if (x == 49){
+                    int[] offsetX = {-1, 0, -49, -1, -49, -1, 0, -49};
+                    int [] offsetY = {-1, -1, -1, 0, 0, 1, 1, 1};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                            highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                else if (y == 0){
+                    int[] offsetX = {-1, 0, 1, -1, 1, -1, 0, -1};
+                    int [] offsetY = {49, 49, 49, 0, 0, 1, 1, 1};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                            highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                else if (y == 49){
+                    int[] offsetX = {-1, 0, 1, -1, 1, -1, 0, 1};
+                    int [] offsetY = {-1, -1, -1, 0, 0, -49, -49, -49};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                            highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                else{
+                    int[] offsetX = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
+                    int[] offsetY = new int[]{-1, -1, -1, 0, 0, 1, 1, 1};
+                    for (int i = 0; i < 8; i++){
+                        if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                            currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                            highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                        }
+                    }
+                    grid[x][y].setCooperating(highestScoreIsC);
+                }
+                
+            }
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    public void step(int x, int y){
+        //the first set of if statements calculates the score for every square
+        //Set for the case when both x and y are 0 because special rules apply
+        scoreCount = 0.0;
+        if (x == 0 && y == 0){
+            int[] neighboursXCoordinate = {49, 0, 1, 49, 1, 49, 0, 1};
+            int [] neighboursYCoordinate = {49, 49, 49, 0, 0, 1, 1, 1};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+        }
+        //set in case x and y are both 49 because special rules apply
+        else if (x == 49 && y == 49){
+            int[] neighboursXCoordinate = {48, 49, 0, 48, 0, 48, 49, 0};
+            int [] neighboursYCoordinate = {48, 48, 48, 49, 49, 0, 0, 0};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+        }
+        //set in case x is 0 and y is 49 because special rules apply
+        else if(x==49 && y == 0){
+            int[] neighboursXCoordinate = {48, 49, 0, 48, 0, 48, 49, 0};
+            int [] neighboursYCoordinate = {49, 49, 49, 0, 0, 1, 1, 1};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+        }
+        //set in case x is 49 and y is 0 because special rules apply
+        else if (x == 0 && y == 49){
+            int[] neighboursXCoordinate = {49, 0, 1, 49, 1, 49, 0, 1};
+            int [] neighboursYCoordinate = {48, 48, 48, 49, 49, 0, 0, 0};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+        }
+        //for special case where x = 0
+        else if (x==0){
+            int[] offsetX = {49, 0, 1, 49, 1, 49, 0, 1};
+            int [] offsetY = {-1, -1, -1, 0, 0, 1, 1, 1};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+
+        }
+        //for special case where y = 0
+        else if (y == 0){
+            int[] offsetX = {-1, 0, 1, -1, 1, -1, 0, -1};
+            int [] offsetY = {49, 49, 49, 0, 0, 1, 1, 1};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+        }
+        //for special case where x = 49
+        else if (x == 49){
+            int[] offsetX = {-1, 0, -49, -1, -49, -1, 0, -49};
+            int [] offsetY = {-1, -1, -1, 0, 0, 1, 1, 1};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+        }
+        //for special case where y = 49
+        else if (y == 49){
+            int[] offsetX = {-1, 0, 1, -1, 1, -1, 0, 1};
+            int [] offsetY = {-1, -1, -1, 0, 0, -49, -49, -49};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+        }
+        //for normal cases where neither x or y are 0 or 49
+        else{
+            int[] offsetX = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
+            int[] offsetY = new int[]{-1, -1, -1, 0, 0, 1, 1, 1};
+            //scoreCount = 0.0;
+            if (grid[x][y].isCooperating()){
+                for(int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }
+                }
+                grid[x][y].setScore(scoreCount);
+            }
+            else{
+                for (int i = 0; i < 8; i++){
+                    if(grid[x + offsetX[i]][y + offsetY[i]].isCooperating()){
+                        scoreCount++;
+                    }  
+                }
+                scoreCount = scoreCount * alpha;
+                grid[x][y].setScore(scoreCount);
+            }
+        }
+        
+        //the next set of if statements finds the highest score among neighbours
+        //then it checks if that neighbour is cooperating and sets the isC value for the current patch to that of the neighbour with the highest score
+        double currentHighestScore = grid[x][y].getScore();
+        boolean highestScoreIsC = grid[x][y].isCooperating();
+        //set up all cases again to check score against each neighbour
+        if (x == 0 && y == 0){
+            int[] neighboursXCoordinate = {49, 0, 1, 49, 1, 49, 0, 1};
+            int [] neighboursYCoordinate = {49, 49, 49, 0, 0, 1, 1, 1};
+            for (int i = 0; i < 8; i++){
+                if (grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore();
+                    highestScoreIsC = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+        else if (x == 49 && y == 49){
+            int[] neighboursXCoordinate = {48, 49, 0, 48, 0, 48, 49, 0};
+            int [] neighboursYCoordinate = {48, 48, 48, 49, 49, 0, 0, 0};
+            for (int i = 0; i < 8; i++){
+                if (grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore();
+                    highestScoreIsC = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+        else if (x == 49 && y == 0){
+            int[] neighboursXCoordinate = {48, 49, 0, 48, 0, 48, 49, 0};
+            int [] neighboursYCoordinate = {49, 49, 49, 0, 0, 1, 1, 1};
+            for (int i = 0; i < 8; i++){
+                if (grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore();
+                    highestScoreIsC = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+        else if (x == 0 && y == 49){
+            int[] neighboursXCoordinate = {49, 0, 1, 49, 1, 49, 0, 1};
+            int [] neighboursYCoordinate = {48, 48, 48, 49, 49, 0, 0, 0};
+            for (int i = 0; i < 8; i++){
+                if (grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].getScore();
+                    highestScoreIsC = grid[neighboursXCoordinate[i]][neighboursYCoordinate[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+        else if (x == 0){
+            int[] offsetX = {49, 0, 1, 49, 1, 49, 0, 1};
+            int [] offsetY = {-1, -1, -1, 0, 0, 1, 1, 1};
+            for (int i = 0; i < 8; i++){
+                if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                    highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+        else if (x == 49){
+            int[] offsetX = {-1, 0, -49, -1, -49, -1, 0, -49};
+            int [] offsetY = {-1, -1, -1, 0, 0, 1, 1, 1};
+            for (int i = 0; i < 8; i++){
+                if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                    highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+        else if (y == 0){
+            int[] offsetX = {-1, 0, 1, -1, 1, -1, 0, -1};
+            int [] offsetY = {49, 49, 49, 0, 0, 1, 1, 1};
+            for (int i = 0; i < 8; i++){
+                if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                    highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+        else if (y == 49){
+            int[] offsetX = {-1, 0, 1, -1, 1, -1, 0, 1};
+            int [] offsetY = {-1, -1, -1, 0, 0, -49, -49, -49};
+            for (int i = 0; i < 8; i++){
+                if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                    highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+        else{
+            int[] offsetX = new int[]{-1, 0, 1, -1, 1, -1, 0, 1};
+            int[] offsetY = new int[]{-1, -1, -1, 0, 0, 1, 1, 1};
+            for (int i = 0; i < 8; i++){
+                if (grid[x + offsetX[i]][y + offsetY[i]].getScore() > currentHighestScore){
+                    currentHighestScore = grid[x + offsetX[i]][y + offsetY[i]].getScore();
+                    highestScoreIsC = grid[x + offsetX[i]][y + offsetY[i]].isCooperating();
+                }
+            }
+            grid[x][y].setCooperating(highestScoreIsC);
+        }
+    }
